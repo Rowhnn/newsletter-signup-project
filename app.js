@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/signup.html");
+  res.sendFile(__dirname + "/public/signup.html");
 });
 
 app.post("/", (req, res) => {
@@ -61,7 +61,7 @@ app.post("/", (req, res) => {
   request.end();
 });
 
-app.post("/public/failure", (req, res) => {
+app.post("/", (req, res) => {
   res.redirect("/public/signup");
 });
 
