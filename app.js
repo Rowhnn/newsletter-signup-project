@@ -26,14 +26,16 @@ if (!dc) {
 
 // --- Middleware ---
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public")); // serves favicon, css, html, etc.
+app.use(express.static("public"));
+
+// --- Ignore favicon requests ---
+app.get("/favicon.ico", (req, res) => res.status(204).end());
 
 // --- Routes ---
 app.get("/", (req, res) => {
-  res.send("🚀 Server is alive and running on Railway!");
   res.sendFile(__dirname + "/public/signup.html");
 });
-app.get("/favicon.ico", (req, res) => res.status(204).end());
+
 app.post("/", (req, res) => {
   const { fname: firstName, lname: lastName, email } = req.body;
 
@@ -78,7 +80,7 @@ app.post("/", (req, res) => {
   request.end();
 });
 
-// Route for "Try Again" button on failure.html
+// Retry route
 app.post("/failure", (req, res) => {
   res.redirect("/");
 });
