@@ -30,9 +30,10 @@ app.use(express.static("public")); // serves favicon, css, html, etc.
 
 // --- Routes ---
 app.get("/", (req, res) => {
+  res.send("🚀 Server is alive and running on Railway!");
   res.sendFile(__dirname + "/public/signup.html");
 });
-
+app.get("/favicon.ico", (req, res) => res.status(204).end());
 app.post("/", (req, res) => {
   const { fname: firstName, lname: lastName, email } = req.body;
 
