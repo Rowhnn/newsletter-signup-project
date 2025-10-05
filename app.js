@@ -7,7 +7,12 @@ const port = process.env.PORT || 3000;
 
 const mailchimpApiKey = process.env.MAILCHIMP_API_KEY;
 const listId = process.env.MAILCHIMP_LIST_ID;
-const dc = mailchimpApiKey.split("-")[1]; // extracts 'us4' etc
+if (!mailchimpApiKey) {
+  throw new Error(
+    "MAILCHIMP_API_KEY is missing. Set it in your cloud environment!"
+  );
+}
+const dc = mailchimpApiKey.split("-")[1];
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
