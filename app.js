@@ -60,14 +60,22 @@ app.post("/", (req, res) => {
   };
 
   const request = https.request(url, options, (response) => {
-    if (response.statusCode === 200) {
-      res.sendFile(__dirname + "/public/success.html");
-    } else {
-      res.sendFile(__dirname + "/public/failure.html");
-    }
-
-    response.on("data", (data) => {
-      console.log("Mailchimp API Response:", data.toString());
+    let responseData = "";
+    response.on("data", (chunk) => {
+      responseData += chunk;
+    });
+    response.on("end", () => {
+      console.log("Mailchimp API Response:", responseData);
+      if (response.statusCode === 200) {
+        res.sendFile(__dirname + "/public/success.html");
+      } else {
+        console.error(
+          "Mailchimp Error Status:",
+          response.statusCode,
+          responseData
+        );
+        res.sendFile(__dirname + "/public/failure.html");
+      }
     });
   });
 
@@ -86,6 +94,7 @@ app.post("/failure", (req, res) => {
 });
 
 // --- Start Server ---
-app.listen(port, () => {
+// CHANGE: Add '0.0.0.0' as host for Railway compatibility
+app.listen(port, "0.0.0.0", () => {
   console.log(`✅ Server running on port ${port}`);
 });
