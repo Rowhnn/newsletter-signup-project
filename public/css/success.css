@@ -1,0 +1,35 @@
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eafff0 0%, #e3f6fd 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI", sans-serif;
+}
+.success-card {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 36px rgba(27, 207, 131, 0.18),
+    0 2px 4px rgba(27, 207, 131, 0.18);
+  max-width: 440px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+.checkmark {
+  font-size: 3.8rem;
+  color: #23955b;
+  margin-bottom: 16px;
+  animation: scaleUp 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.btn-outline-success {
+  border-radius: 20px;
+  padding: 0.65rem 2rem;
+}
